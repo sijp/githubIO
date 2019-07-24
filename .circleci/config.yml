@@ -36,4 +36,4 @@ jobs:
       - run: ls -la
 
       # run tests!
-      - run: npm test
+      - run: cd sijpio; npm test
