@@ -48,6 +48,10 @@ jobs:
       - run:
           name: Copy static files to github.io Repo
           command: cp -rf  ~/repo/dist/* ~/target_repo/
+      - run:
+          name: inspect files
+          working_directory: ~/target_repo
+          command: ls -la
       - deploy:
           name: Trigger static files deployment
           working_directory: ~/target_repo
