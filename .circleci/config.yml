@@ -33,8 +33,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: ls -la
-
       # run tests!
       - run: npm test
 
@@ -45,13 +43,11 @@ jobs:
           working_directory: ~/target_repo
           command: |
             git clone --depth 1 https://${GITHUB_IO_KEY}@github.com/sijp/sijptest.github.io.git
+
       - run:
           name: Copy static files to github.io Repo
           command: cp -rf  ~/repo/dist/* ~/target_repo/sijptest.github.io/
-      - run:
-          name: inspect files
-          working_directory: ~/target_repo/sijptest.github.io
-          command: ls -la
+
       - deploy:
           name: Trigger static files deployment
           working_directory: ~/target_repo/sijptest.github.io
