@@ -1,14 +1,14 @@
 <template>
   <div class="Page">
-    <div v-if="loading">LOADING</div>
-    <div v-else class="markedDownContainer">
-      <MarkedDown :txt="pageTxt" />
+    <div class="markedDownContainer">
+      <MarkedDown :txt="text" />
     </div>
   </div>
 </template>
 
 <script>
 import MarkedDown from "./MarkedDown";
+
 export default {
   name: "Page",
   props: {
@@ -16,17 +16,30 @@ export default {
   },
 
   data() {
-    return { loading: true, pageTxt: "Loading..." };
+    return { text: "Loading" };
+  },
+
+  watch: {
+    pageName() {
+      this.updatePage();
+    }
+  },
+
+  methods: {
+    async updatePage() {
+      const response = await fetch(`/pages/${this.pageName}`);
+      this.text = await response.text();
+    }
   },
 
   components: {
     MarkedDown
   },
 
-  async beforeCreate() {
-    const response = await fetch("/pages/index.md");
-    this.pageTxt = await response.text();
-    this.loading = false;
+  async beforeMount() {
+    // eslint-disable-next-line
+    console.log("beforeMount");
+    this.updatePage();
   }
 };
 </script>
@@ -36,5 +49,6 @@ export default {
 .markedDownContainer {
   width: 720px;
   margin: 0 auto;
+  padding: 30px;
 }
 </style>
