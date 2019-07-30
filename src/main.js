@@ -7,12 +7,15 @@ import "vue-material/dist/theme/default.css";
 
 import "./assets/theme-overrides.css";
 
-import router from "./Router";
-
 Vue.use(VueRouter);
 Vue.use(VueMaterial);
 
+import router from "./Router";
+
+import store from "./Store";
+
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount("#app");

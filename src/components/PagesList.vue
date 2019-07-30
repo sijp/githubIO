@@ -2,7 +2,8 @@
   <div class="PagesList">
     <md-list>
       <md-list-item v-for="post in posts" v-bind:key="post.title" :to="`/page/${post.file}`">
-        <md-icon>radio_button_unchecked</md-icon>
+        <md-icon v-if="selectedPageName===post.file">radio_button_checked</md-icon>
+        <md-icon v-else>radio_button_unchecked</md-icon>
 
         <span class="md-list-item-text">{{post.title}}</span>
       </md-list-item>
@@ -17,7 +18,14 @@ export default {
   name: "PagesList",
 
   data() {
-    return { posts: livePosts };
+    return {
+      posts: livePosts
+    };
+  },
+  computed: {
+    selectedPageName() {
+      return this.$store.getters.currentPage;
+    }
   }
 };
 </script>

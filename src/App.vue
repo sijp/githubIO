@@ -4,11 +4,11 @@
       <md-app-toolbar class="md-large md-dense md-primary">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
-            <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
+            <md-button class="md-icon-button" @click="menuVisible = !menuVisible;">
               <md-icon>menu</md-icon>
             </md-button>
 
-            <span class="md-title">SIJP.GITHUB.IO</span>
+            <span class="md-title site-header">SIJP ◉ GITHUB ◉ IO</span>
           </div>
 
           <!-- <div class="md-toolbar-section-end">
@@ -20,7 +20,7 @@
 
         <div class="md-toolbar-row">
           <md-tabs class="md-primary">
-            <md-tab id="tab-home" md-label="Home"></md-tab>
+            <md-tab id="tab-home" md-label="Home" to="/"></md-tab>
           </md-tabs>
         </div>
       </md-app-toolbar>
@@ -82,11 +82,16 @@ body {
   width: 230px;
   max-width: calc(100vw - 125px);
 }
+
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: "Sarabun", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.site-header {
+  font-family: Helvetica, Arial, sans-serif;
 }
 </style>

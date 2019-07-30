@@ -1,6 +1,7 @@
 import VueRouter from "vue-router";
 import RoutedPage from "./components/RoutedPage";
 import LivePosts from "./config/LivePosts.js";
+import store from "./Store";
 const [firstPostObject] = LivePosts;
 const { file: firstPostFileName } = firstPostObject;
 
@@ -22,6 +23,7 @@ const router = new VueRouter({
 router.afterEach((to, from) => {
   // eslint-disable-next-line
   console.log("afterEach", to, from);
+  store.dispatch("setPage", to.params.pageName);
 });
 
 export default router;
