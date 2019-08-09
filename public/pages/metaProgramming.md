@@ -169,4 +169,4 @@ const res2 = methods.bar(); // call remote method
 
 Can Meta-Programming help here? Lets look at a client code:
 
-<%HelloWorld {"msg":"test"}%>
+<embedded-helloworld msg="test">

@@ -21,19 +21,20 @@ export default {
   },
   computed: {
     compiledMarkdown: function() {
-      const occurances = Array.from(this.txt.matchAll(/<%([\w]+)\s(.*)%>/));
+      /*const occurances = Array.from(this.txt.matchAll(/<%([\w]+)\s(.*)%>/));
       const replacements = occurances.map(occurance => {
         const tag = occurance[1];
-        const props = JSON.stringify(occurance[2]);
+        const props = Object.entries(JSON.parse(occurance[2])).map((pair)=>[pair[0],`"${pair[1]}"`].join("=")).join(" ");
 
-        return { occurance, replacement: `${tag}.render(${props})` };
+        return { occurance, replacement: `<embedded-${tag} ${props}>` };
       });
       const replacedText = replacements.reduce(
         (replacedText, { occurance, replacement }) =>
           replacedText.replace(occurance[0], replacement),
         this.txt
       );
-      return marked(replacedText);
+      return marked(replacedText);*/
+      return marked(this.txt);
     }
   }
 };

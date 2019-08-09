@@ -6,9 +6,14 @@ import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
 
 import "./assets/theme-overrides.css";
+import vueCustomElement from "vue-custom-element";
+import setupEmbeddedComponents from "./embeddedComponents/";
 
 Vue.use(VueRouter);
 Vue.use(VueMaterial);
+Vue.use(vueCustomElement);
+
+setupEmbeddedComponents();
 
 import router from "./Router";
 
