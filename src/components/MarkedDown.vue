@@ -1,6 +1,9 @@
 <template>
   <div class="markedDown">
-    <div v-html="compiledMarkdown"></div>
+    <div v-for="md in compiledMarkdown()" v-bind:key="md.id">
+      <EmbeddedApp v-if="md.cmp" :tag="md.cmp"></EmbeddedApp>
+      <div v-else v-html="md" />
+    </div>
   </div>
 </template>
 
@@ -8,6 +11,7 @@
 import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/github.css";
+import EmbeddedApp from "./EmbeddedApp";
 marked.setOptions({
   highlight: function(code) {
     return hljs.highlightAuto(code).value;
@@ -19,22 +23,23 @@ export default {
   props: {
     txt: String
   },
-  computed: {
+  components: {
+    EmbeddedApp
+  },
+  methods: {
     compiledMarkdown: function() {
-      /*const occurances = Array.from(this.txt.matchAll(/<%([\w]+)\s(.*)%>/));
-      const replacements = occurances.map(occurance => {
-        const tag = occurance[1];
-        const props = Object.entries(JSON.parse(occurance[2])).map((pair)=>[pair[0],`"${pair[1]}"`].join("=")).join(" ");
+      const regex = /<%(.*)%>/g;
+      const texts = this.txt.split(regex);
 
-        return { occurance, replacement: `<embedded-${tag} ${props}>` };
-      });
-      const replacedText = replacements.reduce(
-        (replacedText, { occurance, replacement }) =>
-          replacedText.replace(occurance[0], replacement),
-        this.txt
+      // eslint-disable-next-line
+      const md = texts.map((text, i) =>
+        i % 2 === 0 ? marked(text) : { cmp: text }
       );
-      return marked(replacedText);*/
-      return marked(this.txt);
+
+      // eslint-disable-next-line
+      console.log("HEYYYYYYYYYYYYYYYYYY", md);
+
+      return md;
     }
   }
 };

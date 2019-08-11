@@ -167,6 +167,7 @@ const res1 = methods.foo(); // call local method
 const res2 = methods.bar(); // call remote method
 ```
 
-Can Meta-Programming help here? Lets look at a client code:
+Can Meta-Programming help here? Lets look at the following example:
+<%embedded-methodclient%>
 
-<embedded-helloworld msg="test">
+ending...
